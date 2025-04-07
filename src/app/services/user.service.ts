@@ -20,6 +20,14 @@ export class UserService {
 
   saveToken(token: string): void {
     localStorage.setItem('authToken', token);
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log("Decoded payload:", payload); // DEBUG
+      localStorage.setItem('userRole', payload.role);
+    } catch (e) {
+      console.error('Error decoding token:', e);
+    }
   }
 
   getToken(): string | null {
@@ -32,5 +40,18 @@ export class UserService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+  }
+  getRole(): string {
+    return localStorage.getItem('userRole') || '';
+    // const token = this.getToken();
+    // if (!token) return '';
+
+    // try {
+    //   const payload = JSON.parse(atob(token.split('.')[1]));
+    //   return payload.role || '';  // assumes JWT contains a `role` field
+    // } catch (e) {
+    //   console.error('Failed to parse token:', e);
+    //   return '';
+    // }
   }
 }

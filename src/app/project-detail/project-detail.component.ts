@@ -3,13 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';  // <-- Import CommonModule
 import { RouterModule } from '@angular/router';  // ✅ Import RouterModule
+import { TaskCreateComponent } from '../task-create/task-create.component';
+import { TaskListComponent } from '../task-list/task-list.component';
 
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css'],
-  imports: [CommonModule, RouterModule],  // <-- Include CommonModule here
+  imports: [CommonModule, RouterModule,TaskCreateComponent,TaskListComponent],  // <-- Include CommonModule here
 
 })
 export class ProjectDetailComponent implements OnInit {

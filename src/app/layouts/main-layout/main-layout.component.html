@@ -1,0 +1,16 @@
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="bg-gray-700 text-white w-80 p-10 space-y-10">
+    <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+    <nav class="space-y-8">
+      <a routerLink="/projects" class="block hover:text-gray-300 text-2xl">📁 Projects</a>
+      <a routerLink="/profile" class="block hover:text-gray-300 text-2xl">👤 Profile</a>
+      <button (click)="logout()" class="block hover:text-gray-300 text-2xl">🚪 Logout</button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 bg-gray-100 p-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>

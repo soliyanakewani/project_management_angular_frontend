@@ -1,0 +1,23 @@
+<div class="p-4 bg-white shadow-lg rounded-lg">
+    <h3 class="text-xl font-bold mb-4">Edit Task</h3>
+    <form (ngSubmit)="updateTask()">
+      <label class="block font-semibold">Task Name</label>
+      <input type="text" [(ngModel)]="task.name" name="name" class="border p-2 w-full rounded-md" />
+  
+      <label class="block font-semibold mt-3">Description</label>
+      <textarea [(ngModel)]="task.description" name="description" class="border p-2 w-full rounded-md"></textarea>
+  
+      <label class="block font-semibold mt-3">Status</label>
+      <select [(ngModel)]="task.status" name="status" class="border p-2 w-full rounded-md">
+        <option>To Do</option>
+        <option>In Progress</option>
+        <option>Done</option>
+      </select>
+  
+      <button type="submit" class="mt-4 bg-black text-white px-4 py-2 rounded-md">
+        Update Task
+      </button>
+      
+    </form>
+  </div>
+  

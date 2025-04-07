@@ -11,10 +11,20 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskCreateComponent } from './task-create/task-create.component';
+import { TaskEditComponent } from './task-edit/task-edit.component';
+import { RouterModule } from '@angular/router';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component'; // 🔹 Import RouterModule
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainLayoutComponent,
+    AuthLayoutComponent,
+    
+    
   
     
     
@@ -31,6 +41,9 @@ import { LoginComponent } from './login/login.component';
     ProjectEditComponent,
     RegisterComponent,
     LoginComponent,
+    TaskListComponent,
+    TaskCreateComponent,
+    TaskEditComponent,
     
   ],
   providers: [],

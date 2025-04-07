@@ -1,0 +1,47 @@
+<div class="p-6">
+  <!-- Create Task Button (Right-Aligned) -->
+  <div class="flex justify-end mb-4" *ngIf="userRole === 'admin' || userRole === 'project_manager'">
+    <button [routerLink]="[`/tasks/create/${projectId}`]"
+      class="bg-black text-white px-6 py-2 rounded-lg hover:bg-green-800">
+      + Create task
+    </button>
+  </div>
+
+  <!-- Tasks Section -->
+  <div *ngIf="tasks.length > 0; else noTasks">
+    <h3 class="text-xl font-bold mb-4">Tasks</h3>
+
+    <ul class="mt-4 space-y-3">
+      <li *ngFor="let task of tasks" class="p-4 bg-white shadow-md rounded-lg">
+        <strong>{{ task.name }}</strong> - <span>{{ task.status }}</span>
+        <p>{{ task.description }}</p>
+
+        <!-- Action Buttons (Admin & PM Only) -->
+        <ng-container *ngIf="userRole === 'admin' || userRole === 'project_manager'">
+          <div class="flex gap-4 mt-4">
+            <button (click)="deleteTask(task.id)"
+              class="bg-black text-white px-6 py-3 rounded-lg transition hover:scale-105 hover:bg-red-800">
+              Delete
+            </button>
+
+            <button [routerLink]="['/tasks/edit', task.id]"
+              class="bg-black text-white px-8 py-3 rounded-lg transition hover:scale-105 hover:bg-green-800"
+              [queryParams]="{ projectId: projectId }">
+              Edit
+            </button>
+            <!-- <button (click)="assignTask(task.id)"
+            class="bg-black text-white px-6 py-3 rounded-lg transition hover:scale-105 hover:bg-red-800">
+            Delete
+          </button>
+             -->
+          </div>
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Fallback when no tasks -->
+  <ng-template #noTasks>
+    <p>No tasks found.</p>
+  </ng-template>
+</div>

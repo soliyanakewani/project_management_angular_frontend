@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.credentials).subscribe(
         (response) => {
           console.log('Login successful');
+          const token = response.token;
+          this.userService.saveToken(token); 
           // After login, navigate to the projects page or wherever
           this.router.navigate(['/projects']);
         },

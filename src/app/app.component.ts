@@ -9,6 +9,7 @@ import { UserService } from './services/user.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  title: any;
   constructor(public userService: UserService, private router: Router) {}
 
   logout(): void {

@@ -6,15 +6,40 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskEditComponent } from './task-edit/task-edit.component';
+import { TaskCreateComponent } from './task-create/task-create.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 const routes: Routes = [
-  { path: 'projects', component: ProjectListComponent },
-  { path: 'projects/create', component: ProjectCreateComponent },
-  { path: 'projects/:id', component: ProjectDetailComponent },
-  { path: 'projectsEdit/:id', component: ProjectEditComponent },
+  {
+    path: '',
+    component:MainLayoutComponent,
+    children:[
+      { path: 'projects', component: ProjectListComponent },
+      { path: 'projects/create', component: ProjectCreateComponent },
+      { path: 'projects/:id', component: ProjectDetailComponent },
+      { path: 'projectsEdit/:id', component: ProjectEditComponent },
+      { path: '', component: ProjectListComponent },
+      { path: 'tasks/:id', component: TaskListComponent },
+      { path: 'tasks/edit/:id', component: TaskEditComponent },
+      { path: 'tasks/create/:projectId', component:TaskCreateComponent},
+
+    ]
+  },
+  {
+    path: '',
+    component:AuthLayoutComponent,
+    children:[
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+      
+    ]
+  },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+
+  // { Path: '', redirectTo: '/tasks', pathMatch= 'full'}
 
 ];
 
