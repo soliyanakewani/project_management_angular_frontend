@@ -1,4 +1,3 @@
-<!-- Neutral Light Background, Centered Layout -->
 <div class="min-h-screen bg-[#f8f9fa] flex items-center justify-center px-4 py-12">
 
   <form (ngSubmit)="createProject()"
@@ -6,21 +5,21 @@
 
     <h2 class="text-4xl font-bold text-gray-800 mb-10 text-center">Create a New Project</h2>
 
-    <!-- Project Name -->
+    
     <div class="mb-6">
       <label for="name" class="block text-gray-700 font-semibold mb-2">Project Name:</label>
       <input id="name" [(ngModel)]="project.name" name="name" required
         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-400 focus:outline-none bg-white" />
     </div>
 
-    <!-- Description -->
+    
     <div class="mb-6">
       <label for="description" class="block text-gray-700 font-semibold mb-2">Description:</label>
       <input id="description" [(ngModel)]="project.description" name="description" required
         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-400 focus:outline-none bg-white" />
     </div>
 
-    <!-- Status Dropdown -->
+    
     <div class="mb-8">
       <label for="status" class="block text-gray-700 font-semibold mb-2">Status:</label>
       <select id="status" [(ngModel)]="project.status" name="status" required
@@ -31,7 +30,7 @@
       </select>
     </div>
 
-    <!-- Submit Button -->
+  
     <button type="submit"
       class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-200 to-violet-200 transition duration-300">
       Create Project

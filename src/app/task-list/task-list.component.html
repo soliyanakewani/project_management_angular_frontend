@@ -1,5 +1,5 @@
 <div class="p-6 bg-[#fdfaf6] min-h-screen">
-  <!-- Create Task Button (Right-Aligned) -->
+
   <div class="flex justify-end mb-6" *ngIf="userRole === 'admin' || userRole === 'project_manager'">
     <button [routerLink]="[`/tasks/create/${projectId}`]"
       class="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 transition duration-300">
@@ -10,7 +10,7 @@
   <br>
   <br>
 
-  <!-- Tasks Section -->
+  
   <div *ngIf="tasks.length > 0; else noTasks">
     <h3 class="text-xl font-bold mb-4 text-center text-gray-800">Tasks</h3>
 
@@ -30,7 +30,7 @@
             <p class="text-gray-600 mt-2">{{ task.description }}</p>
           </div>
 
-          <!-- Action Buttons (Right Aligned) -->
+          <!-- Action Buttons  -->
           <div class="flex flex-wrap gap-2 items-start justify-end">
             <ng-container *ngIf="userRole === 'admin' || userRole === 'project_manager'">
               <button (click)="deleteTask(task.id)"
@@ -44,7 +44,7 @@
               </button>
             </ng-container>
 
-            <!-- Assign/Remove Button -->
+            
             <ng-container *ngIf="task.assigned_to; else assignBlock">
               <div class="flex items-center gap-2">
                 <p class="text-sm text-gray-800 font-medium">
@@ -69,13 +69,12 @@
     </ul>
   </div>
 
-  <!-- Fallback when no tasks -->
   <ng-template #noTasks>
     <p class="text-center text-gray-500 mt-10">No tasks found for this project.</p>
   </ng-template>
 </div>
 
-<!-- Assign Modal -->
+
 <div *ngIf="showAssignModal && teamMembers"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
   role="dialog" aria-modal="true" (click)="showAssignModal = false">

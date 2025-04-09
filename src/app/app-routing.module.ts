@@ -13,31 +13,37 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 const routes: Routes = [
   {
-    path: '',
+    path: '', redirectTo: '/login', pathMatch:'full'},
+
+    {
+      path: '',
+      component:AuthLayoutComponent,
+      children:[
+        { path: 'register', component: RegisterComponent },
+        { path: 'login', component: LoginComponent },
+        
+      ]
+    }, 
+
+    {
+      path: '',
     component:MainLayoutComponent,
     children:[
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/create', component: ProjectCreateComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
       { path: 'projectsEdit/:id', component: ProjectEditComponent },
-      { path: '', component: ProjectListComponent },
+      // { path: '', component: ProjectListComponent },
       { path: 'tasks/:id', component: TaskListComponent },
       { path: 'tasks/edit/:id', component: TaskEditComponent },
       { path: 'tasks/create/:projectId', component:TaskCreateComponent},
 
     ]
   },
-  {
-    path: '',
-    component:AuthLayoutComponent,
-    children:[
-      { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-      
-    ]
-  },
+  
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
 
   // { Path: '', redirectTo: '/tasks', pathMatch= 'full'}
 

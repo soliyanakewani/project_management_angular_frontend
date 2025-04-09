@@ -16,7 +16,7 @@ export class ProjectCreateComponent {
   constructor(private projectService: ProjectService, private router: Router) {}
 
   createProject(): void {
-    // Basic validation before making the request
+    //  validation 
     if (!this.project.name || !this.project.description) {
       alert("Project Name and Description are required.");
       return;

@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
 })
 export class ProjectService {
 
-  private apiUrl = 'http://localhost:8888/projects';  // Adjust based on your API URL
+  private apiUrl = 'http://localhost:8888/projects';  
 
   constructor(private http: HttpClient) { }
 
   getAllProjects(): Observable<any[]> {
     return this.http.get<any>(this.apiUrl).pipe(
-      map((response) => response.projects) // Extract the array from the object
+      map((response) => response.projects) // Extract array from the object
     );
   }
 

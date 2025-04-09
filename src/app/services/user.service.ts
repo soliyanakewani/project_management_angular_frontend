@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8888'; // Your backend URL
+  private apiUrl = 'http://localhost:8888'; 
 
   constructor(private http: HttpClient) {}
 
@@ -43,16 +43,7 @@ export class UserService {
   }
   getRole(): string {
     return localStorage.getItem('userRole') || '';
-    // const token = this.getToken();
-    // if (!token) return '';
 
-    // try {
-    //   const payload = JSON.parse(atob(token.split('.')[1]));
-    //   return payload.role || '';  // assumes JWT contains a `role` field
-    // } catch (e) {
-    //   console.error('Failed to parse token:', e);
-    //   return '';
-    // }
   }
   getTeamMembers(): Observable<any> {
     return this.http.get(`${this.apiUrl}/users/team-members`);

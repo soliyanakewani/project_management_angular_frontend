@@ -12,14 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
   user = { username: '', email: '', password: '' , role:''};
-  successMessage: string = ''; // To hold success message
-  errorMessage: string = ''; // To hold error message
+  successMessage: string = ''; 
+  errorMessage: string = ''; 
 
   constructor(private userService: UserService, private router: Router) {}
 
   register(): void {
-    this.successMessage = ''; // Reset success message
-    this.errorMessage = ''; // Reset error message
+    this.successMessage = ''; 
+    this.errorMessage = ''; 
 
     this.userService.register(this.user).subscribe(
       (response: any) => {
@@ -28,7 +28,7 @@ export class RegisterComponent {
         this.successMessage = 'You have successfully registered! Please log in now.';
         setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 3000);  // Redirect after 3 seconds
+        }, 2000);  // Redirect after 3 seconds
       },
       (error) => {
         console.error('Error registering user:', error);

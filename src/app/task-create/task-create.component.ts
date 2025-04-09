@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TaskCreateComponent implements OnInit {
   @Input() projectId!: number;  // Accept projectId as input from parent
-  task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0 }; // Added `project_id`
+  task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0 }; 
   // router = inject(Router)
 
   constructor(
@@ -24,7 +24,7 @@ export class TaskCreateComponent implements OnInit {
     if (!this.projectId) {
       this.projectId = Number(this.route.snapshot.paramMap.get('projectId')); // Get from URL if not passed as input
     }
-    this.task.project_id = this.projectId; // Ensure task has the correct project_id
+    this.task.project_id = this.projectId; 
   }
 
   saveTask(): void {
@@ -33,19 +33,24 @@ export class TaskCreateComponent implements OnInit {
       return;
     }
 
-    // this.task.project_id = this.projectId; // Assign project_id before sending request
-
-    this.taskService.createTask(this.task).subscribe(
-      (response: any) => {
-      alert('Task Created');
-      this.router.navigateByUrl(`/tasks/${this.projectId}`); 
+    console.log('Creating task with data:', this.task);
+ 
+  
+    this.taskService.createTask(this.task, this.projectId).subscribe({
+      next: (response) => {
+        console.log('Task created successfully:', response);
+        alert('Task created successfully!');
+        setTimeout(() => {
+          this.router.navigate([`/tasks/${this.projectId}`]);
+        }, 100); // Small delay to ensure alert doesn't interrupt navigation
       },
-      (error: any) => {
-        console.error('error creating task:', error);
-        alert('failed to create task. try again')
+      error: (err) => {
+        console.error('Error creating task:', err);
+        alert('Failed to create task. Please try again.');
+      }
+    });
   }
-    );
-  }
+  
   goToTaskList() {
     this.router.navigate([`/tasks/${this.projectId}`]);
   }

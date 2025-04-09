@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project.service';
-import { CommonModule } from '@angular/common';  // <-- Import CommonModule
-import { RouterModule } from '@angular/router';  // ✅ Import RouterModule
+import { CommonModule } from '@angular/common';  
+import { RouterModule } from '@angular/router';  
 import { TaskCreateComponent } from '../task-create/task-create.component';
 import { TaskListComponent } from '../task-list/task-list.component';
 
@@ -11,7 +11,7 @@ import { TaskListComponent } from '../task-list/task-list.component';
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css'],
-  imports: [CommonModule, RouterModule,TaskCreateComponent,TaskListComponent],  // <-- Include CommonModule here
+  imports: [CommonModule, RouterModule,TaskCreateComponent,TaskListComponent],  
 
 })
 export class ProjectDetailComponent implements OnInit {

@@ -14,8 +14,8 @@ export class TaskService {
     return this.http.get<any[]>(`${this.apiUrl}/${projectId}`);
   }
 
-  createTask(task: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, task, {responseType: 'text' as 'json'});
+  createTask(task: any, projectId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${projectId}`, task);
 
   }
 

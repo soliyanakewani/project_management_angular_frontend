@@ -1,6 +1,6 @@
 import { Component, inject, Inject, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
-import { CommonModule } from '@angular/common';  // <-- Import CommonModule (for standalone components)
+import { CommonModule } from '@angular/common';  
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../services/user.service';
 
@@ -8,10 +8,10 @@ import { UserService } from '../services/user.service';
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css'],
-  imports: [CommonModule,RouterLink],  // <-- Include CommonModule for directives like *ngIf, *ngFor
+  imports: [CommonModule,RouterLink],  
 })
 export class ProjectListComponent implements OnInit {
-  projects: any[] = [];  // Array to store the projects
+  projects: any[] = [];  
   userRole: string = ''; 
   router= inject(Router)
   constructor(
@@ -21,14 +21,14 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
     this.userRole = this.userService.getRole();
     console.log("role",this.userRole);
-    this.loadProjects();  // Load projects when component initializes
+    this.loadProjects();  
   }
 
 totalProjects = 0;
 inProgressProjects = 0;
 completedProjects = 0;
 
-  // Method to fetch projects from backend service
+  //  projects from backend service
   isLoading = true;
   loadProjects(): void {
     this.isLoading = true;
@@ -48,15 +48,12 @@ completedProjects = 0;
     );
   }
 
-  // Method to view project details (currently logs the project ID)
   viewProject(id: number): void {
     console.log('Viewing project with ID:', id);
-    // this.router.navigateByUrl(`/projects}/${id}`)
-    // Implement your logic to view project details, 
-    // such as navigating to a new route or opening a modal
+
   }
 
-  // Method to delete a project
+  
   deleteProject(id: number): void {
     const confirmed = confirm('are you sure you want to delete this project?');
     if (!confirmed) return;
@@ -64,7 +61,7 @@ completedProjects = 0;
     this.projectService.deleteProject(id).subscribe(
       (res:any) => {
         console.log('Project deleted', res);
-        this.loadProjects();  // Reload the list after successful deletion
+        this.loadProjects();  
       },
       (error) => {
         console.error('Error deleting project:', error);
@@ -72,7 +69,7 @@ completedProjects = 0;
     );
   }
   logout(): void {
-    // Assuming you have a userService with logout logic
+   
     this.userService.logout();
     this.router.navigate(['/login']);
   }
