@@ -12,10 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TaskCreateComponent implements OnInit {
   @Input() projectId!: number;  // Accept projectId as input from parent
   task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0 }; // Added `project_id`
-  router = inject(Router)
+  // router = inject(Router)
 
   constructor(
     private taskService: TaskService, 
+    private router: Router,
     private route: ActivatedRoute,
   ) {}
 
@@ -32,17 +33,20 @@ export class TaskCreateComponent implements OnInit {
       return;
     }
 
-    this.task.project_id = this.projectId; // Assign project_id before sending request
+    // this.task.project_id = this.projectId; // Assign project_id before sending request
 
     this.taskService.createTask(this.task).subscribe(
       (response: any) => {
       alert('Task Created');
-      this.router.navigate([`/tasks/${this.projectId}`]); 
+      this.router.navigateByUrl(`/tasks/${this.projectId}`); 
       },
       (error: any) => {
         console.error('error creating task:', error);
         alert('failed to create task. try again')
   }
     );
+  }
+  goToTaskList() {
+    this.router.navigate([`/tasks/${this.projectId}`]);
   }
 }

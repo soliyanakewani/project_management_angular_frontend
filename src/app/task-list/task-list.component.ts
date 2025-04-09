@@ -15,6 +15,9 @@ export class TaskListComponent implements OnInit {
   @Input() projectId!: number;
   tasks: any[] = [];
   userRole: string = '';
+  teamMembers: any[] = [];
+  selectedTaskId: number | null = null;
+  showAssignModal: boolean = false;
   // router= inject(Router)
 
   constructor(private taskService: TaskService ,
@@ -34,11 +37,18 @@ export class TaskListComponent implements OnInit {
     if (projectIdFromRoute) {
       this.projectId = Number(projectIdFromRoute);
       console.log('Parsed Project ID:', this.projectId);
-      this.loadTasks();
+      if (this.userRole === 'admin' || this.userRole === 'project_manager') {
+        this.loadTeamMembers();
+      } else {
+        this.loadTasks();
+      }
+     
     } else {
       console.error('Project ID missing');
     }
-    
+    if (this.userRole === 'admin' || this.userRole === 'project_manager') {
+      this.loadTeamMembers();
+    }
   }
 
   loadTasks(): void {
@@ -46,9 +56,24 @@ export class TaskListComponent implements OnInit {
     this.taskService.getTasksByProject(this.projectId).subscribe(
       (data) => {
         console.log('Fetched tasks:', data); 
-        this.tasks = data},
+        if(this.teamMembers.length > 0) {
+          this.tasks = data.map((task: any) => {
+            const assignedUser = this.teamMembers.find(user => user.id === task.assigned_to);
+            return {
+              ...task,
+              assigned_user_name: assignedUser ? assignedUser.name : null 
 
-      (error) => {console.error("Error fetching tasks:",  error);}
+            };
+          });
+        } else {
+          this.tasks = data;
+        }
+
+       }, // this.tasks = data},
+
+      (error) => {console.error("Error fetching tasks:",  error);
+
+      }
     );
   }
 
@@ -63,5 +88,41 @@ export class TaskListComponent implements OnInit {
       });
     }
   }
-  
+  loadTeamMembers(): void {
+    this.userService.getTeamMembers().subscribe(
+      (data) => {
+        this.teamMembers = data.users;
+        console.log('Fetched team members:', this.teamMembers);
+        this.loadTasks();
+      },
+      (error) => {
+        console.error('Failed to load team members', error);
+        this.loadTasks();
+      }
+    );
+  }
+  openAssignModal(taskId: number): void {
+    this.selectedTaskId = taskId;
+    this.showAssignModal = true;
+  }
+
+  assignToMember(memberId: number): void {
+    if (this.selectedTaskId !== null) {
+      this.taskService.assignUserToTask(this.selectedTaskId, memberId).subscribe(() => {
+        this.loadTasks();
+        this.showAssignModal = false;
+      });
+    }
+  }
+getUserName(userId:number){
+let user=this.teamMembers.find(E=>E.id==userId);
+return user.username;
 }
+  removeAssignee(taskId: number): void {
+    this.taskService.unassignTask(taskId).subscribe(() => {
+      this.loadTasks();
+    });
+  }
+}
+  
+

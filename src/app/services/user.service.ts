@@ -54,4 +54,8 @@ export class UserService {
     //   return '';
     // }
   }
+  getTeamMembers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/team-members`);
+  }
+  
 }

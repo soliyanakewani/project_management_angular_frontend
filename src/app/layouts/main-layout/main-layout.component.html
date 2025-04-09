@@ -1,16 +1,26 @@
 <div class="flex min-h-screen">
   <!-- Sidebar -->
-  <aside class="bg-gray-700 text-white w-80 p-10 space-y-10">
-    <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
-    <nav class="space-y-8">
-      <a routerLink="/projects" class="block hover:text-gray-300 text-2xl">📁 Projects</a>
-      <a routerLink="/profile" class="block hover:text-gray-300 text-2xl">👤 Profile</a>
-      <button (click)="logout()" class="block hover:text-gray-300 text-2xl">🚪 Logout</button>
+  <aside class="bg-[#f5f1eb] text-[#333] w-72 p-8 flex flex-col space-y-10 shadow-md border-r border-[#e0dcd7]">
+    <h2 class="text-3xl font-bold tracking-wide text-[#4b3f36] border-b border-[#ddd3cc] pb-4">Dashboard</h2>
+
+    <nav class="flex flex-col gap-5 text-lg font-medium">
+      <a routerLink="/projects"
+         class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+        📁 <span>Projects</span>
+      </a>
+      <a routerLink="/profile"
+         class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+        👤 <span>Profile</span>
+      </a>
+      <button (click)="logout()"
+              class="flex items-center gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222] text-left  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300">
+        🚪 <span>Logout</span>
+      </button>
     </nav>
   </aside>
 
   <!-- Main Content -->
-  <div class="flex-1 bg-gray-100 p-8">
+  <div class="flex-1 bg-[#fdfcfb] p-8">
     <router-outlet></router-outlet>
   </div>
 </div>

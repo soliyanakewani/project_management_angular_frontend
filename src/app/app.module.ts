@@ -17,18 +17,14 @@ import { TaskEditComponent } from './task-edit/task-edit.component';
 import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component'; // 🔹 Import RouterModule
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
     AuthLayoutComponent,
-    
-    
-  
-    
-    
-  
   ],
   imports: [
     BrowserModule,
@@ -46,7 +42,13 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     TaskEditComponent,
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

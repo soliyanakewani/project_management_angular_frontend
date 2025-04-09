@@ -1,47 +1,101 @@
-<div class="p-6">
+<div class="p-6 bg-[#fdfaf6] min-h-screen">
   <!-- Create Task Button (Right-Aligned) -->
-  <div class="flex justify-end mb-4" *ngIf="userRole === 'admin' || userRole === 'project_manager'">
+  <div class="flex justify-end mb-6" *ngIf="userRole === 'admin' || userRole === 'project_manager'">
     <button [routerLink]="[`/tasks/create/${projectId}`]"
-      class="bg-black text-white px-6 py-2 rounded-lg hover:bg-green-800">
+      class="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 transition duration-300">
       + Create task
     </button>
   </div>
 
+  <br>
+  <br>
+
   <!-- Tasks Section -->
   <div *ngIf="tasks.length > 0; else noTasks">
-    <h3 class="text-xl font-bold mb-4">Tasks</h3>
+    <h3 class="text-xl font-bold mb-4 text-center text-gray-800">Tasks</h3>
 
-    <ul class="mt-4 space-y-3">
-      <li *ngFor="let task of tasks" class="p-4 bg-white shadow-md rounded-lg">
-        <strong>{{ task.name }}</strong> - <span>{{ task.status }}</span>
-        <p>{{ task.description }}</p>
-
-        <!-- Action Buttons (Admin & PM Only) -->
-        <ng-container *ngIf="userRole === 'admin' || userRole === 'project_manager'">
-          <div class="flex gap-4 mt-4">
-            <button (click)="deleteTask(task.id)"
-              class="bg-black text-white px-6 py-3 rounded-lg transition hover:scale-105 hover:bg-red-800">
-              Delete
-            </button>
-
-            <button [routerLink]="['/tasks/edit', task.id]"
-              class="bg-black text-white px-8 py-3 rounded-lg transition hover:scale-105 hover:bg-green-800"
-              [queryParams]="{ projectId: projectId }">
-              Edit
-            </button>
-            <!-- <button (click)="assignTask(task.id)"
-            class="bg-black text-white px-6 py-3 rounded-lg transition hover:scale-105 hover:bg-red-800">
-            Delete
-          </button>
-             -->
+    <ul class="mt-4 space-y-3 ">
+      <li *ngFor="let task of tasks"
+        class="bg-white/60 backdrop-blur-md p-4 rounded-2xl shadow-md hover:shadow-xl transition-all hover:scale-[1.01]">
+        <div class="flex justify-between items-start flex-wrap gap-4">
+          <div>
+            <strong class="text-xl text-gray-900">{{ task.name }}</strong> -
+            <span [ngClass]="{
+              'bg-yellow-100 text-yellow-700': task.status === 'pending',
+              'bg-green-100 text-green-700': task.status === 'completed',
+              'bg-blue-100 text-blue-700': task.status === 'in_progress'
+            }" class="px-2 py-1 text-sm rounded-full font-medium">
+              {{ task.status }}
+            </span>
+            <p class="text-gray-600 mt-2">{{ task.description }}</p>
           </div>
-        </ng-container>
+
+          <!-- Action Buttons (Right Aligned) -->
+          <div class="flex flex-wrap gap-2 items-start justify-end">
+            <ng-container *ngIf="userRole === 'admin' || userRole === 'project_manager'">
+              <button (click)="deleteTask(task.id)"
+                class="px-4 py-1.5 rounded-full border border-red-300 text-red-600 bg-white text-sm hover:bg-red-100 transition">
+                Delete
+              </button>
+              <button [routerLink]="['/tasks/edit', task.id]"
+                class="px-4 py-1.5 rounded-full border border-green-300 text-green-700 bg-white text-sm hover:bg-green-100 transition"
+                [queryParams]="{ projectId: projectId }">
+                Edit
+              </button>
+            </ng-container>
+
+            <!-- Assign/Remove Button -->
+            <ng-container *ngIf="task.assigned_to; else assignBlock">
+              <div class="flex items-center gap-2">
+                <p class="text-sm text-gray-800 font-medium">
+                  Assigned to: <span class="font-bold text-gray-900">{{ getUserName(task.assigned_to) || 'unknown' }}</span>
+                </p>
+                <button (click)="removeAssignee(task.id)"
+                  class="px-4 py-1.5 rounded-full border border-red-300 text-red-600 bg-white text-sm hover:bg-red-100 transition">
+                  Remove
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #assignBlock>
+              <button (click)="openAssignModal(task.id)"
+                class="px-4 py-1.5 rounded-full border border-blue-300 text-blue-700 bg-white text-sm hover:bg-blue-100 transition">
+                Assign
+              </button>
+            </ng-template>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
 
   <!-- Fallback when no tasks -->
   <ng-template #noTasks>
-    <p>No tasks found.</p>
+    <p class="text-center text-gray-500 mt-10">No tasks found for this project.</p>
   </ng-template>
+</div>
+
+<!-- Assign Modal -->
+<div *ngIf="showAssignModal && teamMembers"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  role="dialog" aria-modal="true" (click)="showAssignModal = false">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md" (click)="$event.stopPropagation()">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Assign Task</h2>
+
+    <div class="space-y-2">
+      <div *ngFor="let member of teamMembers" class="flex justify-between items-center border-b py-2">
+        <span>{{ member.username }}</span>
+        <button (click)="assignToMember(member.id)"
+          class="px-3 py-1 rounded-xl bg-gradient-to-r from-green-200 to-green-300 text-green-700 hover:from-green-300 hover:to-green-400 transition duration-300">
+          Assign
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-4 text-right">
+      <button (click)="showAssignModal = false" class="text-gray-500 hover:text-gray-700">
+        Cancel
+      </button>
+    </div>
+  </div>
 </div>

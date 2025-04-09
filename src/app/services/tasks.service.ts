@@ -26,4 +26,11 @@ export class TaskService {
   deleteTask(taskId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${taskId}`,   {responseType: 'text'} );
   }
+  assignUserToTask(taskId: number, userId: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${taskId}/assign`, { userId }, { responseType: 'text' });
+  }
+  unassignTask(taskId: number) : Observable<any> {
+    return this.http.put(`${this.apiUrl}/${taskId}/unassign`, {}, {responseType: 'text'});
+  }
+  
 }

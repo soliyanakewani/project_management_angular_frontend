@@ -1,23 +1,43 @@
-<div class="p-4 bg-white shadow-lg rounded-lg">
-    <h3 class="text-xl font-bold mb-4">Edit Task</h3>
-    <form (ngSubmit)="updateTask()">
-      <label class="block font-semibold">Task Name</label>
-      <input type="text" [(ngModel)]="task.name" name="name" class="border p-2 w-full rounded-md" />
-  
-      <label class="block font-semibold mt-3">Description</label>
-      <textarea [(ngModel)]="task.description" name="description" class="border p-2 w-full rounded-md"></textarea>
-  
-      <label class="block font-semibold mt-3">Status</label>
-      <select [(ngModel)]="task.status" name="status" class="border p-2 w-full rounded-md">
-        <option>To Do</option>
-        <option>In Progress</option>
-        <option>Done</option>
-      </select>
-  
-      <button type="submit" class="mt-4 bg-black text-white px-4 py-2 rounded-md">
-        Update Task
-      </button>
-      
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center p-8">
+  <div class="w-full max-w-4xl bg-white/70 backdrop-blur-md border border-gray-200 p-12 rounded-3xl shadow-xl">
+    <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Edit Task</h3>
+    
+    <form (ngSubmit)="updateTask()" class="space-y-6">
+      <!-- Task Name -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Task Name</label>
+        <input type="text" [(ngModel)]="task.name" name="name"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          required />
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Description</label>
+        <textarea [(ngModel)]="task.description" name="description" rows="4"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
+          required></textarea>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Status</label>
+        <select [(ngModel)]="task.status" name="status"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          required>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit"
+          class="bg-gradient-to-r from-indigo-400 to-pink-400 text-white py-3 rounded-xl text-lg font-semibold shadow hover:from-indigo-500 hover:to-pink-500 text-white px-8 py-3 rounded-xl font-semibold text-lg hover:bg-gray-800 transition">
+          Update Task
+        </button>
+      </div>
     </form>
   </div>
-  
+</div>
