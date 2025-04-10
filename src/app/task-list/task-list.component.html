@@ -28,6 +28,16 @@
               {{ task.status }}
             </span>
             <p class="text-gray-600 mt-2">{{ task.description }}</p>
+              <!-- progress bar -->
+            <div class="mt-4">
+              <label class="block text-sm font-medium text-gray-700">Progress</label>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="h-2.5 rounded-full bg-green-500"
+                     [style.width]="task.progress ? task.progress + '%' : '0%'">
+                </div>
+              </div>
+              <p *ngIf="task.progress === 0" class="text-sm text-gray-500 mt-1">No progress</p>
+            </div>
           </div>
 
           <!-- Action Buttons  -->
@@ -42,7 +52,7 @@
                 [queryParams]="{ projectId: projectId }">
                 Edit
               </button>
-            </ng-container>
+            
 
             
             <ng-container *ngIf="task.assigned_to; else assignBlock">
@@ -63,6 +73,7 @@
                 Assign
               </button>
             </ng-template>
+          </ng-container>
           </div>
         </div>
       </li>

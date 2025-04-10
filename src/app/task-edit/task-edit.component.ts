@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class TaskEditComponent implements OnInit {
   @Input() taskId!: number;
   projectId!: number;
-  task: any = {};
+  task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0, progress: 0 }; 
 router=inject(Router);
   constructor(
     private taskService: TaskService, 
@@ -41,15 +41,23 @@ router=inject(Router);
   }
 
   updateTask(): void {
-    this.taskService.updateTask(this.taskId, this.task).subscribe(() => {
-      alert('Task Updated');
-      this.router.navigate([`/tasks/${this.projectId}`]);  
-
-        },
-    (error) => {
-      console.error('Error updating task:', error)
-      alert('there was error updating the task. please try again');
-    } 
-  );
+    // Ensure task has progress value (e.g., between 0 and 100)
+    if (this.task.progress < 0 || this.task.progress > 100) {
+      alert('Progress must be between 0 and 100.');
+      return;
+    }
+    this.task.progress =this.task.progress || 0;
+  
+    this.taskService.updateTask(this.taskId, this.task).subscribe({
+      next: () => {
+        alert('Task Updated');
+        this.router.navigate([`/tasks/${this.projectId}`]);  
+      },
+      error: (error) => {
+        console.error('Error updating task:', error)
+        alert('There was an error updating the task. Please try again.');
+      }
+    });
   }
+  
 }

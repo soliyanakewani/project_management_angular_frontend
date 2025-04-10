@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 export class ProjectService {
 
   private apiUrl = 'http://localhost:8888/projects';  
+  private apiUrlTask = 'http://localhost:8888/tasks'; 
+
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +18,11 @@ export class ProjectService {
     return this.http.get<any>(this.apiUrl).pipe(
       map((response) => response.projects) // Extract array from the object
     );
+  }
+
+  
+  getTasksByProject(projectId: number): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrlTask}/${projectId}`);
   }
 
   getProjectById(id: number): Observable<any> {

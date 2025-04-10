@@ -30,6 +30,11 @@
           <option value="Done">Done</option>
         </select>
       </div>
+      <div class="mb-10">
+        <label>Progress (0 - 100):</label>
+        <input type="number" [(ngModel)]="task.progress" name="progress" min="0" max="100" class="input" />
+
+      </div>
 
       
       <div class="text-center">

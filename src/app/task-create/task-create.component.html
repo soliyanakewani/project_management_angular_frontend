@@ -26,6 +26,11 @@
         <option value="Done">Done</option>
       </select>
     </div>
+    <div class="mb-8">
+      <label>Progress (0 - 100):</label>
+  <input type="number" [(ngModel)]="task.progress" name="progress" min="0" max="100" class="input" />
+
+    </div>
 
     <div class="flex flex-col md:flex-row gap-4">
       <button type="submit"

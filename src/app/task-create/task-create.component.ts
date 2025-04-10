@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TaskCreateComponent implements OnInit {
   @Input() projectId!: number;  // Accept projectId as input from parent
-  task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0 }; 
+  task = { name: '', description: '', status: 'To Do', assigned_to: null, project_id: 0, progress: 0 }; 
   // router = inject(Router)
 
   constructor(
@@ -35,7 +35,7 @@ export class TaskCreateComponent implements OnInit {
 
     console.log('Creating task with data:', this.task);
  
-  
+    this.task.progress = this.task.progress || 0;
     this.taskService.createTask(this.task, this.projectId).subscribe({
       next: (response) => {
         console.log('Task created successfully:', response);

@@ -19,12 +19,14 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component'; // 🔹 Import RouterModule
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { ProjectProgressComponent } from './project-progress/project-progress.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
     AuthLayoutComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,8 @@ import { AuthInterceptor } from './auth.interceptor';
     TaskListComponent,
     TaskCreateComponent,
     TaskEditComponent,
+    ProjectProgressComponent,
+    
     
   ],
   providers: [

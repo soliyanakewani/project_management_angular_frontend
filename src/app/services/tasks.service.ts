@@ -32,5 +32,8 @@ export class TaskService {
   unassignTask(taskId: number) : Observable<any> {
     return this.http.put(`${this.apiUrl}/${taskId}/unassign`, {}, {responseType: 'text'});
   }
-  
+  updateStatus(taskId: number, status: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/tasks/${taskId}/status`, { status });
+  }
+    
 }

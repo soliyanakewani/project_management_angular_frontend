@@ -11,6 +11,8 @@ import { TaskEditComponent } from './task-edit/task-edit.component';
 import { TaskCreateComponent } from './task-create/task-create.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { ProjectProgressComponent } from './project-progress/project-progress.component';
+
 const routes: Routes = [
   {
     path: '', redirectTo: '/login', pathMatch:'full'},
@@ -30,6 +32,7 @@ const routes: Routes = [
     component:MainLayoutComponent,
     children:[
       { path: 'projects', component: ProjectListComponent },
+      {path: 'project-progress', component:ProjectProgressComponent },
       { path: 'projects/create', component: ProjectCreateComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
       { path: 'projectsEdit/:id', component: ProjectEditComponent },
