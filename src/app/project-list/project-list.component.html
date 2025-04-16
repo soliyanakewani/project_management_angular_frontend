@@ -3,7 +3,7 @@
   <main class="flex-1 p-8">
     <div class="bg-white/60 backdrop-blur-md border border-gray-200 p-8 rounded-3xl shadow-2xl w-full">
       <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">Project List</h2>
-      <hr class="border-t-2 border-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-10">
+      <!-- <hr class="border-t-2 border-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-10"> -->
 
       <!-- Spinner -->
       <div *ngIf="isLoading" class="text-center my-10">
@@ -12,7 +12,7 @@
       </div>
 
       <!-- Summary Cards -->
-      <div *ngIf="projects.length > 0 && !isLoading" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+      <!-- <div *ngIf="projects.length > 0 && !isLoading" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
         <div class="bg-[#f5eee6] p-8 rounded-2xl shadow-lg text-center">
           <p class="text-4xl font-bold">{{ totalProjects }}</p>
           <p class="text-gray-600 mt-2">Total Projects</p>
@@ -25,15 +25,15 @@
           <p class="text-4xl font-bold">{{ completedProjects }}</p>
           <p class="text-gray-600 mt-2">Completed</p>
         </div>
-      </div>
-      <div class="w-full max-w-3xl mx-auto mt-6 px-4">
+      </div> -->
+      <!-- <div class="w-full max-w-3xl mx-auto mt-6 px-4">
         <div class="bg-white rounded-2xl shadow-md p-6">
           <h2 class="text-xl font-semibold mb-4 text-center text-gray-800">Project Progress</h2>
           
           <canvas id="progressChart" class="w-full h-64"></canvas>
         </div>
         <button>progress detail</button>
-      </div>
+      </div> -->
       
 
       
@@ -51,7 +51,7 @@
 
       <!-- Project List -->
       <ul *ngIf="projects.length > 0 && !isLoading" class="space-y-4">
-        <li *ngFor="let project of projects"
+        <li *ngFor="let project of FilteredProjects"
           class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:shadow-xl transition-all hover:scale-[1.01]">
           <div class="flex justify-between items-start flex-wrap gap-4">
             <div>

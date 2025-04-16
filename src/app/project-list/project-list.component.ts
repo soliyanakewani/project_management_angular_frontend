@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Chart } from 'chart.js/auto';
 import { TaskService } from '../services/tasks.service';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -21,16 +21,25 @@ export class ProjectListComponent implements OnInit {
   isLoading = true;
   router = inject(Router);
   projectChart: any;
+  FilteredProjects: any[] = [];
+  statusFilter:string = ''
 
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.userRole = this.userService.getRole();
+    this.route.queryParams.subscribe(params => {
+      this.statusFilter = params['status']; // Get the query param if exists
+    })
     this.loadProjects();
+
+    
+    
   }
 
   loadProjects(): void {
@@ -38,6 +47,13 @@ export class ProjectListComponent implements OnInit {
     this.projectService.getAllProjects().subscribe(
       (data) => {
         this.projects = data;
+        if(this.statusFilter) {
+          this.FilteredProjects= this.projects.filter(p => p.status === this.statusFilter);
+          console.log("filtered projects: ", this.FilteredProjects)
+      
+        } else {
+          this.FilteredProjects = this.projects;
+        }
         this.totalProjects = data.length;
         this.completedProjects = data.filter(p => p.status?.toLowerCase() === 'completed').length;
         this.inProgressProjects = data.filter(p => p.status?.toLowerCase() === 'in progress').length;

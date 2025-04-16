@@ -20,12 +20,15 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ProjectProgressComponent } from './project-progress/project-progress.component';
+import { UsersComponent } from './pages/users/users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
     AuthLayoutComponent,
+    
 
   ],
   imports: [
@@ -43,6 +46,9 @@ import { ProjectProgressComponent } from './project-progress/project-progress.co
     TaskCreateComponent,
     TaskEditComponent,
     ProjectProgressComponent,
+    UsersComponent,
+    ProfileComponent,
+
     
     
   ],

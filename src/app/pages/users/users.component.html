@@ -1,0 +1,76 @@
+<div class="p-6 bg-white rounded-2xl shadow-md">
+    <h2 class="text-2xl font-bold mb-4">All Users</h2>
+  
+    <div *ngIf="isLoading" class="text-center">Loading users...</div>
+  
+    <div *ngIf="!isLoading && users.length === 0" class="text-center text-gray-500">
+      No users found.
+    </div>
+  
+    <table *ngIf="users.length > 0" class="w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-left">
+          <th class="p-3">ID</th>
+          <th class="p-3">Username</th>
+          <th class="p-3">Email</th>
+          <th class="p-3">Role</th>
+          <th class="p-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" class="hover:bg-gray-50 border-b">
+          <td class="p-3">{{ user.id }}</td>
+          <td class="p-3">{{ user.username }}</td>
+          <td class="p-3">{{ user.email }}</td>
+          <td class="p-3">{{ user.role }}</td>
+          <td class="p-2 text-center space-x-3">
+                <!-- Edit icon -->
+                <button (click)="openEditRoleModal(user)">
+                  <i class="fas fa-pencil-alt text-blue-500 hover:text-blue-700"></i>
+                </button>
+                <!-- Delete icon -->
+                <button (click)="deleteUser(user.id)">
+                  <i class="fas fa-trash text-red-500 hover:text-red-700"></i>
+                </button>
+              </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Edit Role Modal -->
+<div
+*ngIf="showEditModal"
+class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+>
+<div class="bg-white rounded-lg p-6 w-96 shadow-lg">
+  <h2 class="text-lg font-bold mb-4">Edit Role for {{ selectedUser?.username }}</h2>
+
+  <label for="role" class="block mb-2 font-semibold">New Role:</label>
+  <select
+    [(ngModel)]="selectedRole"
+    class="w-full p-2 border rounded mb-4"
+  >
+    <option value="admin">Admin</option>
+    <option value="project_manager">Project Manager</option>
+    <option value="team_member">Team Member</option>
+  </select>
+
+  <div class="flex justify-end space-x-2">
+    <button
+      (click)="cancelEdit()"
+      class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded"
+    >
+      Cancel
+    </button>
+    <button
+      (click)="updateUserRole()"
+      class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Save
+    </button>
+  </div>
+</div>
+</div>
+
+  

@@ -12,6 +12,8 @@ import { TaskCreateComponent } from './task-create/task-create.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { ProjectProgressComponent } from './project-progress/project-progress.component';
+import { UsersComponent } from './pages/users/users.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,8 @@ const routes: Routes = [
       { path: 'tasks/:id', component: TaskListComponent },
       { path: 'tasks/edit/:id', component: TaskEditComponent },
       { path: 'tasks/create/:projectId', component:TaskCreateComponent},
+      { path: 'users', component:UsersComponent},
+      { path: 'profile', component:ProfileComponent}
 
     ]
   },

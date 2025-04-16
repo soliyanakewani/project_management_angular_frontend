@@ -1,15 +1,40 @@
-<div class="p-8 min-h-screen bg-gradient-to-br from-[#f5f0e1] to-[#e9d6b1] text-gray-800">
+<!-- Page wrapper: apply background here -->
+<div class="min-h-screen  p-6 text-gray-800">
+
+  <div class="max-w-7xl mx-auto">
     <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">Project Progress</h2>
-  
+
+    <!-- Summary Cards -->
+    <div *ngIf="projects.length > 0 && !isLoading" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+      <div (click)="goToProjects()" class="bg-white/40 backdrop-blur-lg border border-pink-300 text-pink-700 p-6 rounded-2xl shadow-xl text-center">
+        <p class="text-4xl font-bold">{{ totalProjects }}</p>
+        <p class="mt-2">Total Projects</p>
+      </div>
+      <div (click)="goToProjects('In Progress')" class="bg-white/40 backdrop-blur-lg border border-emerald-300 text-emerald-700 p-6 rounded-2xl shadow-xl text-center">
+        <p class="text-4xl font-bold">{{ inProgressProjects }}</p>
+        <p class="mt-2">In Progress</p>
+      </div>
+      <div (click)="goToProjects('Completed')" class="bg-white/40 backdrop-blur-lg border border-indigo-300 text-indigo-700 p-6 rounded-2xl shadow-xl text-center">
+        <p class="text-4xl font-bold">{{ completedProjects }}</p>
+        <p class="mt-2">Completed</p>
+      </div>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="bg-white/30 backdrop-blur-lg border border-indigo-200 p-6 rounded-2xl shadow-xl w-full max-w-3xl mx-auto">
+      <h2 class="text-xl font-semibold mb-4 text-center text-indigo-800">Project Progress Overview</h2>
+      <canvas id="progressChart" class="w-full h-64"></canvas>
+    </div>
+
     <!-- Circular Progress Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      <div *ngFor="let p of projectProgress" class="bg-[#ffffff] p-6 rounded-2xl shadow-lg text-center hover:bg-[#f9f4e3] transition-all">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-10">
+      <div *ngFor="let p of projectProgress" class="bg-white/40 backdrop-blur-md border border-gray-200 p-6 rounded-2xl shadow-lg text-center">
         <p class="text-lg font-semibold mb-2 text-gray-700">{{ p.name }}</p>
         <div class="relative w-24 h-24 mx-auto">
           <svg class="w-full h-full transform -rotate-90">
             <circle class="text-gray-300" stroke-width="10" stroke="currentColor" fill="transparent" r="36" cx="48" cy="48"/>
             <circle
-              class="text-indigo-500"
+              class="text-indigo-400"
               stroke-width="10"
               [attr.stroke-dasharray]="p.dashArray"
               [attr.stroke-dashoffset]="p.dashOffset"
@@ -19,16 +44,10 @@
               r="36" cx="48" cy="48"/>
           </svg>
           <div class="absolute inset-0 flex items-center justify-center">
-            <span class="text-xl font-bold text-gray-800">{{ p.progress }}%</span>
+            <span class="text-xl font-bold text-indigo-500">{{ p.progress }}%</span>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Bar Chart Placeholder -->
-    <div class="mt-12">
-      <h3 class="text-2xl font-semibold text-center text-gray-800 mb-4">Progress Overview</h3>
-      <!-- Chart.js component goes here later -->
-    </div>
   </div>
-  
+</div>

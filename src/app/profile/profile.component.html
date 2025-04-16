@@ -1,0 +1,58 @@
+<div class="max-w-3xl mx-auto p-7 bg-gray-100 rounded-2xl shadow-lg mt-20">
+    <div class="flex flex-col items-center mb-6">
+        <!-- Avatar -->
+        <div class="h-24 w-24 p-2">
+          <img src="assets/images/profile.jpg" alt="Avatar" class="w-full h-full rounded-full object-cover" />
+          <!-- <button class="text-sm text-blue-500 hover:underline mt-2">Change photo</button> -->
+        </div>
+        <h2 class="text-2xl font-bold mt-4">My Profile</h2>
+      </div>
+      
+  
+    <!-- Username -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold mb-1">Username:</label>
+      <div *ngIf="editField !== 'username'; else editUsername" class="flex items-center border rounded px-3 py-2 bg-gray-100">
+        <span class="flex-1 text-gray-800">{{ user.username }}</span>
+        <button (click)="editField = 'username'" class="text-blue-500">✏️</button>
+      </div>
+      <ng-template #editUsername>
+        <input [(ngModel)]="user.username" name="username"
+          class="w-full p-2 border rounded bg-white text-gray-800" />
+      </ng-template>
+    </div>
+  
+    <!-- Email -->
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold mb-1">Email:</label>
+      <div *ngIf="editField !== 'email'; else editEmail" class="flex items-center border rounded px-3 py-2 bg-gray-100">
+        <span class="flex-1 text-gray-800">{{ user.email }}</span>
+        <button (click)="editField = 'email'" class="text-blue-500">✏️</button>
+      </div>
+      <ng-template #editEmail>
+        <input [(ngModel)]="user.email" name="email" type="email"
+          class="w-full p-2 border rounded bg-white text-gray-800" />
+      </ng-template>
+    </div>
+  
+    <!-- Role (read-only) -->
+    <div class="mb-6">
+      <label class="block text-gray-700 font-semibold">Role</label>
+      <input [value]="user.role" disabled class="w-full p-2 border bg-gray-100 rounded text-gray-500" />
+    </div>
+  
+    <!-- Buttons -->
+    <div class="flex justify-end gap-4">
+      <button 
+        (click)="cancelEdit()" 
+        class="bg-gradient-to-r from-pink-400 to-violet-400 px-4 py-2 rounded text-white hover:opacity-90">
+        Cancel
+      </button>
+      <button 
+        (click)="updateProfile()" 
+        class="bg-gradient-to-r from-pink-400 to-violet-400 text-white px-4 py-2 rounded hover:opacity-90">
+        Save
+      </button>
+    </div>
+  </div>
+  

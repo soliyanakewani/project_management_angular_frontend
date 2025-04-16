@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
           const token = response.token;
           this.userService.saveToken(token); 
 
-          this.router.navigate(['/projects']);
+          this.router.navigate(['/project-progress']);
         },
         (error) => {
           console.error('Login failed', error);

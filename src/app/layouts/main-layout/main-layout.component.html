@@ -1,17 +1,37 @@
-<div class="flex min-h-screen">
+<div class="flex min-h-screen bg-gray-400">
   <!-- Sidebar -->
   <aside class="bg-[#f5f1eb] text-[#333] w-72 p-8 flex flex-col space-y-10 shadow-md border-r border-[#e0dcd7]">
     <h2 class="text-3xl font-bold tracking-wide text-[#4b3f36] border-b border-[#ddd3cc] pb-4">Dashboard</h2>
 
     <nav class="flex flex-col gap-5 text-lg font-medium">
+            <a routerLink="/project-progress"
+      class="flex items-center bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z"/>
+     </svg>
+     <span>Dashboard</span>
+   </a>
+      
       <a routerLink="/projects"
          class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
         📁 <span>Projects</span>
       </a>
-      <a routerLink="/project-progress"
-         class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
-        📊<span>Project Progress</span>
-      </a>
+        <a routerLink="/profile"
+      class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+      👤 <span>My-profile</span>
+   </a>
+       
+       <div *ngIf = "userRole === 'admin' ">
+        <a routerLink="/users"
+      class="flex items-center  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+     📁 <span>Users Management</span>
+   </a>
+       </div>
+
+      
+ 
+
+   
       <button (click)="logout()"
               class="flex items-center gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222] text-left  bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300">
         🚪 <span>Logout</span>

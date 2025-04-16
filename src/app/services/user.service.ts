@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -45,8 +45,56 @@ export class UserService {
     return localStorage.getItem('userRole') || '';
 
   }
+  // getAllUsers(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/users`);
+    getAllUsers(): Observable<any> {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+      return this.http.get<any>(`${this.apiUrl}/users`, { headers });
+    }
+  
+  
   getTeamMembers(): Observable<any> {
     return this.http.get(`${this.apiUrl}/users/team-members`);
   }
+
+  updateUserRole(userId: number, updatedUser: any): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+  
+    return this.http.put(`${this.apiUrl}/users/${userId}`, updatedUser, { headers, responseType: 'text' });
+  }
+  deleteUser(userId: number): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+  
+    return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers, responseType: 'text' });
+  }
+
+  getProfile(): Observable<any> {
+    const token = localStorage.getItem('token'); // or however you store it
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+  
+    return this.http.get(`${this.apiUrl}/profile`, { headers });
+  }
+  
+  
+  updateProfile(data: { username: string; email: string }): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+  
+    return this.http.put(`${this.apiUrl}/profile`, data, { headers, responseType: 'text' });
+  }
+  
+  
+  
+  
   
 }
