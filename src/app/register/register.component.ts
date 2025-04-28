@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   imports:[FormsModule,CommonModule]
 })
 export class RegisterComponent {
-  user = { username: '', email: '', password: '' , role:''};
+  user = { username: '', email: '', password: '' , role:'null'};
   successMessage: string = ''; 
   errorMessage: string = ''; 
 
@@ -28,7 +28,7 @@ export class RegisterComponent {
         this.successMessage = 'You have successfully registered! Please log in now.';
         setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 2000);  // Redirect after 3 seconds
+        }, 1000);  // Redirect after 3 seconds
       },
       (error) => {
         console.error('Error registering user:', error);
