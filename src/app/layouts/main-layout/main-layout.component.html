@@ -29,7 +29,12 @@
        </div>
 
       
- 
+       <div *ngIf="userRole === 'team_member'">
+        <a routerLink="/my-tasks"
+           class="flex items-center bg-gradient-to-r from-pink-200 to-violet-200 text-gray-800 font-medium shadow-sm hover:from-pink-300 hover:to-violet-300 gap-3 px-4 py-2 rounded-xl transition hover:bg-[#eae6e1] hover:text-[#222]">
+          🧾 <span>My Tasks</span>
+        </a>
+      </div>
 
    
       <button (click)="logout()"

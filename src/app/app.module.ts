@@ -22,6 +22,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ProjectProgressComponent } from './project-progress/project-progress.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MyTasksComponent } from './pages/my-tasks/my-tasks.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProfileComponent } from './profile/profile.component';
     ProjectProgressComponent,
     UsersComponent,
     ProfileComponent,
+    MyTasksComponent,
 
     
     

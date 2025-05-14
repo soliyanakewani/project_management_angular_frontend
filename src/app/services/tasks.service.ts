@@ -19,6 +19,11 @@ export class TaskService {
 
   }
 
+  getTasksByUser(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8888/tasks/user/${userId}`);
+  }
+  
+  
   updateTask(taskId: number, task: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${taskId}`, task,  {responseType: 'text'});
   }

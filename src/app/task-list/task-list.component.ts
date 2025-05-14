@@ -18,7 +18,6 @@ export class TaskListComponent implements OnInit {
   teamMembers: any[] = [];
   selectedTaskId: number | null = null;
   showAssignModal: boolean = false;
-  // router= inject(Router)
 
   constructor(private taskService: TaskService ,
     private route: ActivatedRoute,
@@ -59,6 +58,14 @@ export class TaskListComponent implements OnInit {
         if(this.teamMembers.length > 0) {
           this.tasks = data.map((task: any) => {
             const assignedUser = this.teamMembers.find(user => user.id === task.assigned_to);
+            
+             // Update status based on progress
+              let status = 'pending';
+              if (task.progress === 100) {
+                status = 'completed';
+              } else if (task.progress > 0 && task.progress < 100) {
+                status = 'in_progress';
+              }
             return {
               ...task,
               assigned_user_name: assignedUser ? assignedUser.name : null 

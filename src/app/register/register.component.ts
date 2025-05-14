@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   imports:[FormsModule,CommonModule]
 })
 export class RegisterComponent {
-  user = { username: '', email: '', password: '' , role:'null'};
+  user = { username: '', email: '', password: '' , role: null};
   successMessage: string = ''; 
   errorMessage: string = ''; 
 

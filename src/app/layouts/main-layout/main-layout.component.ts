@@ -14,6 +14,11 @@ export class MainLayoutComponent {
 
   ngOnInit() {
     this.userRole = this.userService.getRole();
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.userRole = payload.role;
+    }
 
   }
   
@@ -25,5 +30,8 @@ export class MainLayoutComponent {
 
   
   }
+
+
+
 
 }
